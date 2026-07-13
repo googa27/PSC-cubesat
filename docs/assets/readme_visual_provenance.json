@@ -1,0 +1,25 @@
+{
+  "schema": "psc_cubesat.readme_visual_provenance.v1",
+  "artifacts": [
+    {
+      "path": "docs/assets/adcs-attitude-loop.svg",
+      "sha256": "84d62ff4be3913daa31e1af6916eee57c442e2f1c30f68cd071222d56923c318",
+      "authorship": "hand-authored didactic map",
+      "grounded_in": [
+        "etat.cpp",
+        "etat.h"
+      ],
+      "claim_boundary": "historical code-structure explanation; not flight-validation evidence"
+    },
+    {
+      "path": "docs/assets/tlm-sensor-timeseries.png",
+      "authorship": "deterministically generated from the bundled historical sample",
+      "grounded_in": [
+        "tlm.3",
+        "tlm_transcription2.py scale factors"
+      ],
+      "rebuild": "uv run --with numpy==2.2.6 --with matplotlib==3.10.3 python scripts/generate_readme_telemetry_plot.py",
+      "claim_boundary": "didactic decode; sample header credits Gerard Auvray; not flight-validation evidence"
+    }
+  ]
+}

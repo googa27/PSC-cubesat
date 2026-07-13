@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">Historical PSC CubeSat ADCS attitude loop</title>
+  <desc id="desc">Dark themed didactic diagram of the repository's ADCS loop: reference models and sensors feed attitude estimation, which feeds a magnetic control law and coil-current command.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#58a6ff" />
+    </marker>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="6" stdDeviation="6" flood-color="#010409" flood-opacity="0.55"/>
+    </filter>
+    <style>
+      .bg { fill: #0d1117; }
+      .panel { fill: #161b22; stroke: #30363d; stroke-width: 2; filter: url(#shadow); }
+      .data { fill: #10233a; stroke: #58a6ff; }
+      .estimate { fill: #182a1f; stroke: #3fb950; }
+      .control { fill: #2b2111; stroke: #d29922; }
+      .act { fill: #321820; stroke: #f85149; }
+      .note { fill: #1f1b2e; stroke: #a371f7; }
+      .title { fill: #f0f6fc; font: 700 34px Inter, Segoe UI, sans-serif; }
+      .subtitle { fill: #8b949e; font: 18px Inter, Segoe UI, sans-serif; }
+      .h { fill: #f0f6fc; font: 700 20px Inter, Segoe UI, sans-serif; }
+      .t { fill: #c9d1d9; font: 16px Inter, Segoe UI, sans-serif; }
+      .s { fill: #8b949e; font: 14px Inter, Segoe UI, sans-serif; }
+      .arrow { stroke: #58a6ff; stroke-width: 3; fill: none; marker-end: url(#arrow); }
+      .feedback { stroke: #a371f7; stroke-width: 3; fill: none; stroke-dasharray: 8 8; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1280" height="720" />
+  <text x="48" y="58" class="title">PSC CubeSat ADCS loop — historical / didactic map</text>
+  <text x="48" y="90" class="subtitle">Based on etat.cpp / etat.h structure. Not flight certification evidence.</text>
+
+  <rect x="50" y="130" width="260" height="142" rx="18" class="panel data" />
+  <text x="75" y="168" class="h">Reference models</text>
+  <text x="75" y="200" class="t">Sun vector from Julian date</text>
+  <text x="75" y="226" class="t">IGRF magnetic field table</text>
+  <text x="75" y="252" class="s">TLE/orbital terms are placeholders</text>
+
+  <rect x="50" y="332" width="260" height="160" rx="18" class="panel data" />
+  <text x="75" y="370" class="h">Sensor inputs</text>
+  <text x="75" y="402" class="t">Solar panels -> sun vector</text>
+  <text x="75" y="428" class="t">Magnetometer -> B measured</text>
+  <text x="75" y="454" class="t">Gyro -> angular rate</text>
+  <text x="75" y="480" class="s">Several routines return stubs</text>
+
+  <rect x="380" y="218" width="280" height="185" rx="18" class="panel estimate" />
+  <text x="410" y="256" class="h">Attitude estimate</text>
+  <text x="410" y="288" class="t">Normalize observed vectors</text>
+  <text x="410" y="314" class="t">Cross-product innovation</text>
+  <text x="410" y="340" class="t">Quaternion update q += dq dt</text>
+  <text x="410" y="366" class="s">Bias b updated by integral term</text>
+
+  <rect x="735" y="130" width="260" height="142" rx="18" class="panel note" />
+  <text x="760" y="168" class="h">Reference attitude</text>
+  <text x="760" y="200" class="t">qref from orbital geometry</text>
+  <text x="760" y="226" class="t">omegaref target rate</text>
+  <text x="760" y="252" class="s">Educational prototype scope</text>
+
+  <rect x="735" y="332" width="260" height="160" rx="18" class="panel control" />
+  <text x="760" y="370" class="h">Magnetic control law</text>
+  <text x="760" y="402" class="t">dq = qref * inv(q)</text>
+  <text x="760" y="428" class="t">m from B x rate error</text>
+  <text x="760" y="454" class="t">gains kPi/kSi/kBi/kIi</text>
+  <text x="760" y="480" class="s">Hard-coded constants in code</text>
+
+  <rect x="1050" y="248" width="180" height="142" rx="18" class="panel act" />
+  <text x="1075" y="286" class="h">Actuation</text>
+  <text x="1075" y="318" class="t">Magnetic moment</text>
+  <text x="1075" y="344" class="t">Coil currents</text>
+  <text x="1075" y="370" class="s">SurfaceX/Y/Z</text>
+
+  <path class="arrow" d="M310 200 C345 205, 350 240, 380 270" />
+  <path class="arrow" d="M310 410 C345 410, 350 360, 380 342" />
+  <path class="arrow" d="M660 310 C700 290, 705 215, 735 205" />
+  <path class="arrow" d="M660 335 C695 350, 705 395, 735 410" />
+  <path class="arrow" d="M995 410 C1020 395, 1035 355, 1050 330" />
+  <path class="feedback" d="M1140 390 C1130 610, 455 630, 180 492" />
+
+  <rect x="380" y="520" width="615" height="88" rx="18" class="panel" />
+  <text x="410" y="555" class="h">Historical limitations visible in this repository</text>
+  <text x="410" y="584" class="t">No CI, no dependency manifest, placeholder sensor/TLE routines, hard-coded file paths and educational constants.</text>
+</svg>
